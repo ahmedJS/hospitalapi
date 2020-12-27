@@ -1,0 +1,10 @@
+make logic to allow route and the next of it using regx  ---- hald of that completed
+
+1-convert route set from user to regx that must begin in start and after that complete or without complete.
+
+e.g. user route : /home/action
+converts to : /^\/home\/action[\W]*$/
+
+//which means it must follows that pattern
+
+2-check the url which is requested is follow any pattern of api //solve of problem running middleware in invalid request uri
