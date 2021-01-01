@@ -11,6 +11,7 @@
 		public function post($uri,$action);
 		public function map($methods,$uri,$action);
 		public function add($url,$action);
+		public function group($main_url, $actions);
 		public function run();
 	}
 
@@ -25,12 +26,58 @@
 		public  $container  = null;
 		private $di 		= null;
 		private $Middleware = [];
+
 		function __construct($container=null)
 		{
 			$this->container = $container;
 			$this->response  = new ResponseApi;
 			$this->request   = new RequestApi;
 			$this->set_lib();
+		}
+
+
+		/*
+		* @param String $main_url contains the main url of tasks
+		* @param Array $actions contains [{completeURL,method,action}...etc]
+		*/
+		public function group($main_url, $actions)
+		{
+			foreach ($actions as $action) {
+				switch (\strtoupper($action["method"])) {
+					case "GET":
+						$this->get($this->merge_url($main_url,$action["completed_url"]),
+								   $action["action"]);
+						break;
+					case "POST":
+						$this->post($this->merge_url($main_url,$action["completed_url"]),
+						$action["action"]);
+					break;
+					case "MAP":
+						$this->map($action["methods"],$this->merge_url($main_url,$action["completed_url"]),
+						$action["action"]);
+					default:
+						# code...
+						break;
+				}
+			}
+		}
+
+		/*
+		* @return merged two or more uri strings
+		* $arg infinity arg or uri String
+		*/
+		public function merge_url()
+		{
+			$num_arg = \func_num_args();
+			$result  = "";
+			if($num_arg >= 2)
+			{
+				$args = \func_get_args();
+				for($i = 0 ; $i < $num_arg; $i++){
+					$result.=$args[$i];
+				}
+			}
+			return $result;
 		}
 
 		// implemented
@@ -156,15 +203,20 @@
 					//result returned object of response as well as perform the function
 					$result = ($action)($this->request->setParam(isset($req_prm)?$req_prm:null),$this->response,$lib);
 
+					/* perform the excecution */
+
 					// middleware at first
 					$this->perform_middleware();
 
 					// process the casched response
 					$result->processResponse();
+
+					/* endof perform the excecution */
 				}
 				else
 				{
 					// in future handle exception with special class
+					// should be sort of engineErrorType
 					die("the request is not exists");
 				}
 

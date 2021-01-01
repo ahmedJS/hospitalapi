@@ -1,15 +1,8 @@
 <?php 
+
 use classes\Route;
 use classes\ApiCore;
 use classes\ApiContainer;
-
-// error handling testing
-
-// error_reporting(E_ALL | E_STRICT);
-
-// ini_set("display_errors", 1);
-
-// var_dump($clasa);
 
 spl_autoload_register(function($class_name){
 	require_once $class_name.".php";
@@ -42,6 +35,13 @@ $system->get("home/name",function($req,$res,$di){
 	$res->write("hello from get");
 	return $res;
 });
+
+$system->group("home",[
+	["completed_url" => "/xnxx","method"=>"GET","action"=>function($req,$res){
+		$res->write("hello from group");
+		return $res;
+	}]
+]);
 
 $system->run();
 
