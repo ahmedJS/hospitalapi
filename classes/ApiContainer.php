@@ -15,6 +15,7 @@ class ApiContainer extends IApiContainer
 {
 	function __construct()
 	{	
+		
 	}
 	function addlib($lib_name,$lib_class)
 	{
