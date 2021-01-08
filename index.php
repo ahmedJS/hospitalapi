@@ -45,28 +45,4 @@ $system->group("home",[
 
 $system->run();
 
-
-
-
-/*
-**** route class usage ****
-$route = new Route;
-// ******* usage of route class  *****
-// here to adding route to system which specify the base rule of requests
-$route->addRoute("{controller}/{action}");
-
-// here test the uri if accepted by routes setted
-$route->patchRoute("controller/action");
-
-*/
-
-
-/*
-	here is tasting waste
-
-	$system->map("GET,POST, PUT","home/name",function($req,$res){
-	$res->write("its ok");
-	return $res;
-});
-*/
 ?>
