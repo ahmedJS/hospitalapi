@@ -1,0 +1,41 @@
+
+compare between request method and action method //done
+
+manage map method request
+
+
+******
+15/12/2020 __ done
+create function that decission the performing of middlewares
+
+
+******
+2020/12/16 __ done
+make it possible to use middleware on specific uri's
+or for just one uri and so on 
+
+
+
+
+******
+2020/12/19
+the previous task need to test***
+
+-developing
+1-parsing the data as well
+2-make logic to allow route and the next of it using regx  _____ done
+
+
+
+
+
+*****using******
+
+-include (third party software through DI)
+-create authorization JWT for all urls
+-create authorization JWT for haram url's (if it possible)
+
+
+*****mission*****
+using the system that i have made like so
+body data
